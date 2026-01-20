@@ -1,3 +1,5 @@
+
+
 ## Script Analysis
 
 This Python script is a **Magic Formula stock screener** for US markets (AMEX, NYSE, NASDAQ) that implements Joel Greenblatt's Magic Formula investing strategy. It fetches stock data using multi-threading, calculates rankings based on Earnings Yield (EY) and Return on Capital (ROC), and emails the results with CSV/Excel attachments.[^1]
@@ -72,7 +74,7 @@ python MagicUS-Multi-Thread-Email-Override-Attach.py \
 
 1. **Ticker Collection**: Reads tickers from three CSV files and deduplicates them[^1]
 2. **Resume Check**: Loads `partialprogress.csv` if it exists to skip completed tickers[^1]
-3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (min 32 threads)[^1]
+3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (max 32 threads)[^1]
 4. **Data Extraction**: For each ticker, fetches EBIT, Enterprise Value, Market Cap, and Sector from yfinance[^1]
 5. **Magic Formula Calculation**:
     - EY (Earnings Yield) = EBIT / Enterprise Value
@@ -117,11 +119,11 @@ Since this uses Gmail SMTP, you need an **App Password** (not your regular Gmail
 
 ## Performance Notes
 
-- Uses **dynamic thread count** based on CPU cores (minimum 32 threads for I/O-bound operations)[^1]
+- Uses **dynamic thread count** based on CPU cores (maximum 32 threads for I/O-bound operations)[^1]
 - Progress bar shows real-time processing status via tqdm[^1]
 - Average processing time depends on total ticker count and yfinance API responsiveness
 
 <div align="center">⁂</div>
 
-
+[^1]: MagicUS-Multi-Thread-Email-Override-Attach.py
 
