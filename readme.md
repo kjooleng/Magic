@@ -72,7 +72,7 @@ python MagicUS-Multi-Thread-Email-Override-Attach.py \
 
 1. **Ticker Collection**: Reads tickers from three CSV files and deduplicates them
 2. **Resume Check**: Loads `partialprogress.csv` if it exists to skip completed tickers
-3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (min 32 threads)
+3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (max 32 threads)
 4. **Data Extraction**: For each ticker, fetches EBIT, Enterprise Value, Market Cap, and Sector from yfinance
 5. **Magic Formula Calculation**:
     - EY (Earnings Yield) = EBIT / Enterprise Value
@@ -117,7 +117,7 @@ Since this uses Gmail SMTP, you need an **App Password** (not your regular Gmail
 
 ## Performance Notes
 
-- Uses **dynamic thread count** based on CPU cores (minimum 32 threads for I/O-bound operations)
+- Uses **dynamic thread count** based on CPU cores (maximum 32 threads for I/O-bound operations)
 - Progress bar shows real-time processing status via tqdm
 - Average processing time depends on total ticker count and yfinance API responsiveness
 
