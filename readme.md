@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 ## Script Analysis
 
 This Python script is a **Magic Formula stock screener** for US markets (AMEX, NYSE, NASDAQ) that implements Joel Greenblatt's Magic Formula investing strategy. It fetches stock data using multi-threading, calculates rankings based on Earnings Yield (EY) and Return on Capital (ROC), and emails the results with CSV/Excel attachments.
