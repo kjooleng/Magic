@@ -23,7 +23,7 @@ pip install pandas numpy yfinance requests tqdm openpyxl
 
 ### Input Requirements
 
-The script expects three CSV files in the same directory:[^1]
+The script expects three CSV files in the same directory:[^2]
 
 - `NYSE20260109.csv` - NYSE ticker list with a `ticker` column
 - `NASDAQ20260109.csv` - NASDAQ ticker list with a `ticker` column
@@ -46,13 +46,13 @@ python MagicUS-Multi-Thread-Email-Override-Attach.py \
 
 | Argument | Required | Default | Description |
 | :-- | :-- | :-- | :-- |
-| `--sender` | Yes | None | Sender email address [^1] |
-| `--password` | Yes | None | Gmail app password or SMTP token [^1] |
-| `--recipient` | Yes | None | Recipient email address [^1] |
-| `--smtphost` | No | smtp.gmail.com | SMTP server hostname [^1] |
-| `--smtpport` | No | 587 | SMTP server port [^1] |
-| `--failthreshold` | No | 60.0 | Max failure % before skipping attachments [^1] |
-| `--partialinterval` | No | 50 | Save partial progress every N tickers [^1] |
+| `--sender` | Yes | None | Sender email address [^3] |
+| `--password` | Yes | None | Gmail app password or SMTP token [^4] |
+| `--recipient` | Yes | None | Recipient email address [^5] |
+| `--smtphost` | No | smtp.gmail.com | SMTP server hostname [^6] |
+| `--smtpport` | No | 587 | SMTP server port [^7] |
+| `--failthreshold` | No | 60.0 | Max failure % before skipping attachments [^8] |
+| `--partialinterval` | No | 50 | Save partial progress every N tickers [^9] |
 
 ### Advanced Example
 
@@ -72,27 +72,27 @@ python MagicUS-Multi-Thread-Email-Override-Attach.py \
 
 ### Data Processing Flow
 
-1. **Ticker Collection**: Reads tickers from three CSV files and deduplicates them[^1]
-2. **Resume Check**: Loads `partialprogress.csv` if it exists to skip completed tickers[^1]
-3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (max 32 threads)[^1]
-4. **Data Extraction**: For each ticker, fetches EBIT, Enterprise Value, Market Cap, and Sector from yfinance[^1]
+1. **Ticker Collection**: Reads tickers from three CSV files and deduplicates them[^10]
+2. **Resume Check**: Loads `partialprogress.csv` if it exists to skip completed tickers[^11]
+3. **Multi-threaded Fetching**: Uses ThreadPoolExecutor with thread count based on CPU cores (max 32 threads)[^12]
+4. **Data Extraction**: For each ticker, fetches EBIT, Enterprise Value, Market Cap, and Sector from yfinance[^13]
 5. **Magic Formula Calculation**:
     - EY (Earnings Yield) = EBIT / Enterprise Value
     - ROC (Return on Capital) = EBIT / (Net Working Capital + Net Fixed Assets)
-    - Score = EY Rank + ROC Rank (lower is better)[^1]
-6. **Industry Filtering**: Excludes Financial Services and Utilities sectors[^1]
-7. **Output Generation**: Creates ranked CSV and Excel files[^1]
-8. **Email Delivery**: Sends results with conditional attachment logic[^1]
+    - Score = EY Rank + ROC Rank (lower is better)[^14]
+6. **Industry Filtering**: Excludes Financial Services and Utilities sectors[^15]
+7. **Output Generation**: Creates ranked CSV and Excel files[^16]
+8. **Email Delivery**: Sends results with conditional attachment logic[^17]
 
 ### Email Logic
 
-- **Success case** (failure rate ≤ threshold): Sends full results with CSV, Excel, and error log attachments[^1]
-- **High failure case** (failure rate > threshold): Sends alert with top 5 stocks summary only, no attachments[^1]
+- **Success case** (failure rate ≤ threshold): Sends full results with CSV, Excel, and error log attachments[^18]
+- **High failure case** (failure rate > threshold): Sends alert with top 5 stocks summary only, no attachments[^19]
 
 
 ### Output Files
 
-All files are saved in the `output/` directory:[^1]
+All files are saved in the `output/` directory:[^20]
 
 - `USA_AMEX_NYSE_NASDAQ_magicformula_YYYY-MM-DD.csv` - Full ranked results
 - `USA_AMEX_NYSE_NASDAQ_magicformula_YYYY-MM-DD.xlsx` - Excel version
@@ -102,7 +102,7 @@ All files are saved in the `output/` directory:[^1]
 
 ## Gmail App Password Setup
 
-Since this uses Gmail SMTP, you need an **App Password** (not your regular Gmail password):[^1]
+Since this uses Gmail SMTP, you need an **App Password** (not your regular Gmail password):[^21]
 
 1. Enable 2-Factor Authentication on your Google account
 2. Go to Google Account → Security → 2-Step Verification → App passwords
@@ -111,16 +111,16 @@ Since this uses Gmail SMTP, you need an **App Password** (not your regular Gmail
 
 ## Error Handling
 
-- **Retry logic**: Each ticker is retried up to 3 times with 1-second delays[^1]
-- **Graceful degradation**: Failed tickers are logged and counted but don't stop execution[^1]
-- **Partial saves**: Progress is auto-saved every 50 tickers (configurable) to enable resume[^1]
-- **Error logging**: All failures are timestamped in `errorlog.txt`[^1]
+- **Retry logic**: Each ticker is retried up to 3 times with 1-second delays[^22]
+- **Graceful degradation**: Failed tickers are logged and counted but don't stop execution[^23]
+- **Partial saves**: Progress is auto-saved every 50 tickers (configurable) to enable resume[^24]
+- **Error logging**: All failures are timestamped in `errorlog.txt`[^25]
 
 
 ## Performance Notes
 
-- Uses **dynamic thread count** based on CPU cores (maximum 32 threads for I/O-bound operations)[^1]
-- Progress bar shows real-time processing status via tqdm[^1]
+- Uses **dynamic thread count** based on CPU cores (maximum 32 threads for I/O-bound operations)[^26]
+- Progress bar shows real-time processing status via tqdm[^27]
 - Average processing time depends on total ticker count and yfinance API responsiveness
 
 <div align="center">⁂</div>
