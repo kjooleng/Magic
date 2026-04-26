@@ -82,7 +82,7 @@ def get_nasdaq100_tickers():
 }
     response = requests.get(url, headers=headers)
     tables = pd.read_html(response.text)
-    df = tables[4]  # 5th table is current constituents
+    df = tables[5]  # 6th table is current constituents
     return df["Ticker"].tolist()
 
 def get_dow30_tickers():
@@ -94,7 +94,7 @@ def get_dow30_tickers():
 }    
     response = requests.get(url, headers=headers)
     tables = pd.read_html(response.text)
-    df = tables[2]  # 3rd table is current components
+    df = tables[1]  # 2nd table is current components
     return df["Symbol"].tolist()   
 
 def filter_industries(df):
