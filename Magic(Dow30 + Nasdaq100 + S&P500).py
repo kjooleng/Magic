@@ -73,7 +73,7 @@ def get_sp500_tickers():
     return df["Symbol"].tolist()
 
 def get_nasdaq100_tickers():
-    url = "https://en.wikipedia.org/wiki/Nasdaq-100"
+    url = "https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies"
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -81,11 +81,11 @@ def get_nasdaq100_tickers():
 }
     response = requests.get(url, headers=headers)
     tables = pd.read_html(response.text)
-    df = tables[5]  # 6th table is current constituents
+    df = tables[0]  # 6th table is current constituents
     return df["Ticker"].tolist()
 
 def get_dow30_tickers():
-    url = "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"
+    url = "https://en.wikipedia.org/wiki/List_of_Dow_Jones_Industrial_Average_companies"
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -93,7 +93,7 @@ def get_dow30_tickers():
 }    
     response = requests.get(url, headers=headers)
     tables = pd.read_html(response.text)
-    df = tables[1]  # 2nd table is current components
+    df = tables[0]  # 2nd table is current components
     return df["Symbol"].tolist()   
 
 def filter_industries(df):
